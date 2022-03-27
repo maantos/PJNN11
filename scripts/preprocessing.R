@@ -1,0 +1,92 @@
+# załadowanie bibliotek
+library(tm)
+
+# zmiana katalogu roboczego
+work_dir <- "D:/KW/PJNN11"
+setwd(work_dir)
+
+# zdefiniowanie katalogów funkcjonalnych
+input_dir <- "./data"
+output_dir <- "./results"
+scripts_dir <- "./scripts"
+workspaces_dir <- "./workspaces"
+
+# utworzenie katalogów wynikowych
+dir.create(output_dir, showWarnings = F)
+dir.create(workspaces_dir, showWarnings = F)
+
+# zdefiniowanie funkcji do tworzenia ścieżek dostępu
+create_path <- function(parent, child){
+	paste(
+		parent,
+		child,
+		sep = "/"
+	)
+}
+
+# utworzenie korpusu dokumentów
+corpus_dir <- create_path(
+	input_dir,
+	"Literatura - streszczenia - oryginal"
+)
+
+corpus <- VCorpus(
+	DirSource(
+		corpus_dir,
+		pattern = "*.txt",
+		encoding = "UTF-8"
+	),
+	readerControl = list(
+		language = "pl_PL"
+	)
+)
+
+# wstępne przetwarzanie
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+
+stoplist_file <- create_path(
+	input_dir,
+	"stopwords_pl.txt"
+)
+stoplist <- readLines(
+	stoplist_file, 
+	encoding = "UTF-8"
+)
+corpus <- tm_map(corpus, removeWords, stoplist)
+corpus <- tm_map(corpus, stripWhitespace)
+
+# zdefiniowanie własnych funkcji transformujących
+
+# funkcja do usuwania pojedynczych znaków
+remove_char <- content_transformer(
+	function(text, char){
+		gsub(char, "", text)
+	}
+)
+
+# funkcja do usuwania z tekstu podziału na akapity
+paste_paragraphs <- function(text){
+	paste(text, collapse = " ")
+}
+
+# funkcja do usuwania rozszerzeń z nazw plików
+cut_extensions <- function(document, ext = "txt"){
+	meta(document, "id") <- gsub(
+		paste("\\.", ext, "$", sep = ""),
+		"",
+		meta(document, "id")
+	)
+	return(document)
+}
+
+# wywołanie własnych funkcji transformujących
+corpus <- tm_map(corpus, remove_char, intToUtf8(8722))
+corpus <- tm_map(corpus, remove_char, intToUtf8(190))
+corpus <- tm_map(corpus, content_transformer(paste_paragraphs))
+corpus <- tm_map(corpus, cut_extensions)
+corpus <- tm_map(corpus, stripWhitespace)
+
+
+
