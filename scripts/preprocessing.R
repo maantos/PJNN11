@@ -16,14 +16,13 @@ workspaces_dir <- "./workspaces"
 dir.create(output_dir, showWarnings = F)
 dir.create(workspaces_dir, showWarnings = F)
 
-# zdefiniowanie funkcji do tworzenia ścieżek dostępu
-create_path <- function(parent, child){
-	paste(
-		parent,
-		child,
-		sep = "/"
-	)
-}
+# wykonaie skryptu z definicjami funkcji
+source_file <- paste(
+  scripts_dir,
+  "functions.R",
+  sep = "/"
+)
+source(source_file)
 
 # utworzenie korpusu dokumentów
 corpus_dir <- create_path(
@@ -57,30 +56,6 @@ stoplist <- readLines(
 )
 corpus <- tm_map(corpus, removeWords, stoplist)
 corpus <- tm_map(corpus, stripWhitespace)
-
-# zdefiniowanie własnych funkcji transformujących
-
-# funkcja do usuwania pojedynczych znaków
-remove_char <- content_transformer(
-	function(text, char){
-		gsub(char, "", text)
-	}
-)
-
-# funkcja do usuwania z tekstu podziału na akapity
-paste_paragraphs <- function(text){
-	paste(text, collapse = " ")
-}
-
-# funkcja do usuwania rozszerzeń z nazw plików
-cut_extensions <- function(document, ext = "txt"){
-	meta(document, "id") <- gsub(
-		paste("\\.", ext, "$", sep = ""),
-		"",
-		meta(document, "id")
-	)
-	return(document)
-}
 
 # wywołanie własnych funkcji transformujących
 corpus <- tm_map(corpus, remove_char, intToUtf8(8722))
