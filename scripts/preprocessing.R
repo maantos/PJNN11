@@ -1,8 +1,9 @@
 # załadowanie bibliotek
 library(tm)
+library(hunspell)
 
 # zmiana katalogu roboczego
-work_dir <- "D:/KW/PJNN11"
+work_dir <- "L:/lato21na22/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie katalogów funkcjonalnych
@@ -33,7 +34,7 @@ corpus_dir <- create_path(
 corpus <- VCorpus(
 	DirSource(
 		corpus_dir,
-		pattern = "*.txt",
+#		pattern = "*.txt",
 		encoding = "UTF-8"
 	),
 	readerControl = list(
@@ -88,5 +89,29 @@ corpus <- tm_map(corpus, content_transformer(paste_paragraphs))
 corpus <- tm_map(corpus, cut_extensions)
 corpus <- tm_map(corpus, stripWhitespace)
 
+# zdefiniowanie funkcji do lematyzacji
+polish <- dictionary("pl_PL")
+lemmatize <- function(text){
+  vectorized_text <- unlist(hunspell_parse(text, dict = polish))
+  lemmatized_vectorized_text <- hunspell_stem(vectorized_text, dict = polish)
+  for (i in 1:length(lemmatized_vectorized_text)) {
+    if (length(lemmatized_vectorized_text[[i]]) == 0){
+      lemmatized_vectorized_text[i] <- vectorized_text[i]
+    }
+    if (length(lemmatized_vectorized_text[[i]])  > 1){
+      lemmatized_vectorized_text[i] <- lemmatized_vectorized_text[[i]][1]
+    }
+  }
+  lemmatized_vectorized_text <- unlist(lemmatized_vectorized_text)
+  lemmatized_text <- paste(lemmatized_vectorized_text, collapse = " ")
+  return(lemmatized_text)
+}
+corpus <- tm_map(corpus, content_transformer(lemmatize))
 
-
+# eksport zawartości kurpusu do plików tekstowych
+preprocessed_dir <- create_path(
+  input_dir,
+  "Literatura - streszczenia - przetworzone"
+)
+dir.create(preprocessed_dir, showWarnings = F)
+writeCorpus(corpus, preprocessed_dir)
