@@ -2,7 +2,7 @@
 library(tm)
 
 # zmiana katalogu roboczego
-work_dir <- "L:/lato21na22/PJNN11"
+work_dir <- "C:/Programming/RStudio/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie katalogów funkcjonalnych
@@ -26,7 +26,7 @@ source(source_file)
 # utworzenie korpusu dokumentów
 corpus_dir <- create_path(
   input_dir,
-  "Literatura - streszczenia - przetworzone"
+  "Literatura_projekt_przettworzone"
 )
 
 corpus <- VCorpus(
@@ -125,25 +125,25 @@ matrixes_dir <- create_path(
 dir.create(matrixes_dir, showWarnings = F)
 
 # eksport macierzy do pliku
-# matrix_file <- create_path(
-#   matrixes_dir,
-#   "tdm_tf_all.csv"
-# )
-# write.table(
-#   tdm_tf_all_m,
-#   matrix_file,
-#   sep = ";",
-#   dec = ",",
-#   col.names = NA
-# )
-# matrix_file <- create_path(
-#   matrixes_dir,
-#   "dtm_tf_all.csv"
-# )
-# write.table(
-#   dtm_tf_all_m,
-#   matrix_file,
-#   sep = ";",
-#   dec = ",",
-#   col.names = NA
-# )
+matrix_file <- create_path(
+matrixes_dir,
+"tdm_tf_all.csv"
+)
+ write.table(
+   tdm_tf_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_tf_all.csv"
+ )
+ write.table(
+   dtm_tf_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )

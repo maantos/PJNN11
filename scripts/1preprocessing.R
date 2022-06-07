@@ -3,12 +3,12 @@ library(tm)
 library(hunspell)
 
 # zmiana katalogu roboczego
-work_dir <- "L:/lato21na22/PJNN11"
+work_dir <- "C:/Programming/RStudio/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie katalogów funkcjonalnych
 input_dir <- "./data"
-output_dir <- "./results"
+output_dir <- "./projektOutput"
 scripts_dir <- "./scripts"
 workspaces_dir <- "./workspaces"
 
@@ -27,7 +27,7 @@ source(source_file)
 # utworzenie korpusu dokumentów
 corpus_dir <- create_path(
 	input_dir,
-	"Literatura - streszczenia - oryginal"
+	"Literatura_projekt"
 )
 
 corpus <- VCorpus(
@@ -86,7 +86,7 @@ corpus <- tm_map(corpus, content_transformer(lemmatize))
 # eksport zawartości kurpusu do plików tekstowych
 preprocessed_dir <- create_path(
   input_dir,
-  "Literatura - streszczenia - przetworzone"
+  "Literatura_projekt_przettworzone"
 )
 dir.create(preprocessed_dir, showWarnings = F)
 writeCorpus(corpus, preprocessed_dir)

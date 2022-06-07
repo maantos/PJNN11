@@ -2,7 +2,7 @@
 library(wordcloud)
 
 # zmiana katalogu roboczego
-work_dir <- "L:/lato21na22/PJNN11"
+work_dir <- "C:/Programming/RStudio/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie lokalizacji katalogu ze skryptami

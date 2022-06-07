@@ -2,7 +2,7 @@
 library(lsa)
 
 # zmiana katalogu roboczego
-work_dir <- "L:/lato21na22/PJNN11"
+work_dir <- "C:/Programming/RStudio/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie lokalizacji katalogu ze skryptami
@@ -11,7 +11,7 @@ scripts_dir <- "./scripts"
 # wykonanie skryptu frequency_matrix.R
 source_file <- paste(
   scripts_dir,
-  "frequency_matrix.R",
+  "2frequency_matrix.R",
   sep = "/"
 )
 eval(
@@ -81,7 +81,7 @@ coord_terms <- lsa$tk%*%diag(lsa$sk)
 terms_importance <- diag(lsa$tk%*%diag(lsa$sk)%*%t(diag(lsa$sk))%*%t(lsa$tk))
 important_terms <- names(tail(sort(terms_importance),30))
 coord_important_terms <- coord_terms[important_terms,]
-own_terms <- c("eustachy", "harry", "ron", "hermiona", "dumbledore", "umbridge", "syriusz", "łucja", "zuzanna", "piotr", "edmund", "aslana", "narnii", "bell", "edward", "jacob", "wampir", "czarownica", "czarodziej")
+own_terms <- c("antek", "dobrze", "hobbit", "praca", "ziemia", "krowa", "mario", "ino", "jeno", "kiej")
 coord_own_terms <- coord_terms[own_terms,]
 coord_plot_terms <- coord_own_terms
 
