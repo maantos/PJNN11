@@ -2,7 +2,7 @@
 library(tm)
 
 # zmiana katalogu roboczego
-work_dir <- "C:/Programming/RStudio/PJNN11"
+work_dir <- "C:/Users/qjsjnz/Desktop/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie katalogów funkcjonalnych
@@ -26,14 +26,14 @@ source(source_file)
 # utworzenie korpusu dokumentów
 corpus_dir <- create_path(
   input_dir,
-  "Literatura_projekt_przettworzone"
+  "new_dataset_przetworzone"
 )
 
 corpus <- VCorpus(
   DirSource(
     corpus_dir,
     #		pattern = "*.txt",
-    encoding = "CP1250"
+    encoding = "UTF-8"
   ),
   readerControl = list(
     language = "pl_PL"

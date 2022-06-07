@@ -2,7 +2,7 @@
 library(wordcloud)
 
 # zmiana katalogu roboczego
-work_dir <- "C:/Programming/RStudio/PJNN11"
+work_dir <- "C:/Users/qjsjnz/Desktop/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie lokalizacji katalogu ze skryptami
@@ -11,7 +11,7 @@ scripts_dir <- "./scripts"
 # wykonanie skryptu frequency_matrix.R
 source_file <- paste(
   scripts_dir,
-  "lda.R",
+  "2frequency_matrix.R",
   sep = "/"
 )
 eval(
