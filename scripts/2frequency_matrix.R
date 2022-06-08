@@ -74,6 +74,27 @@ tdm_tfidf_2_16 <- TermDocumentMatrix(
     )
   )
 )
+#our
+tdm_tfidf_4_18 <- TermDocumentMatrix(
+  corpus,
+  control = list(
+    weighting = weightTfIdf,
+    bounds = list(
+      global = c(4,18)
+    )
+  )
+)
+tdm_bin_1_20 <- TermDocumentMatrix(
+  corpus,
+  control = list(
+    weighting = weightBin,
+    bounds = list(
+      global = c(1,20)
+    )
+  )
+)
+
+
 dtm_tf_all <- DocumentTermMatrix(corpus)
 dtm_tfidf_all <- DocumentTermMatrix(
   corpus,
@@ -105,17 +126,45 @@ dtm_tfidf_2_16 <- DocumentTermMatrix(
   )
 )
 
+#our
+dtm_tfidf_4_18 <- DocumentTermMatrix(
+  corpus,
+  control = list(
+    weighting = weightTfIdf,
+    bounds = list(
+      global = c(4,18)
+    )
+  )
+)
+dtm_bin_1_20 <- DocumentTermMatrix(
+  corpus,
+  control = list(
+    weighting = weightBin,
+    bounds = list(
+      global = c(1,20)
+    )
+  )
+)
+
 # przekształcenie macierzy rzadkich do macierzy klasycznych
 tdm_tf_all_m <- as.matrix(tdm_tf_all)
 tdm_tfidf_all_m <- as.matrix(tdm_tfidf_all)
 tdm_bin_all_m <- as.matrix(tdm_bin_all)
 tdm_tf_2_16_m <- as.matrix(tdm_tf_2_16)
 tdm_tfidf_2_16_m <- as.matrix(tdm_tfidf_2_16)
+#our
+tdm_tfidf_4_18_m <- as.matrix(tdm_tfidf_4_18)
+tdm_bin_1_20_m <- as.matrix(tdm_bin_1_20)
+
+
 dtm_tf_all_m <- as.matrix(dtm_tf_all)
 dtm_tfidf_all_m <- as.matrix(dtm_tfidf_all)
 dtm_bin_all_m <- as.matrix(dtm_bin_all)
 dtm_tf_2_16_m <- as.matrix(dtm_tf_2_16)
 dtm_tfidf_2_16_m <- as.matrix(dtm_tfidf_2_16)
+#our
+dtm_tfidf_4_18_m <- as.matrix(dtm_tfidf_4_18)
+dtm_bin_1_20_m <- as.matrix(dtm_bin_1_20)
 
 # utworzenie katalogu na macierze
 matrixes_dir <- create_path(
@@ -147,3 +196,124 @@ matrixes_dir,
    dec = ",",
    col.names = NA
  )
+ ########
+ matrix_file <- create_path(
+   matrixes_dir,
+   "tdm_tfidf_all_m.csv"
+ )
+ write.table(
+   tdm_tfidf_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_tfidf_all_m.csv"
+ )
+ write.table(
+   dtm_tfidf_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ ########
+ matrix_file <- create_path(
+   matrixes_dir,
+   "tdm_tfidf_2_16_m.csv"
+ )
+ write.table(
+   tdm_tfidf_2_16_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_tfidf_2_16_m.csv"
+ )
+ write.table(
+   dtm_tfidf_2_16_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ ########
+ matrix_file <- create_path(
+   matrixes_dir,
+   "tdm_bin_all_m.csv"
+ )
+ write.table(
+   tdm_bin_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_bin_all_m.csv"
+ )
+ write.table(
+   dtm_bin_all_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ 
+ ########
+ matrix_file <- create_path(
+   matrixes_dir,
+   "tdm_tfidf_4_18_m.csv"
+ )
+ write.table(
+   tdm_tfidf_4_18_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_tfidf_4_18_m.csv"
+ )
+ write.table(
+   dtm_tfidf_4_18_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ 
+ ########
+ matrix_file <- create_path(
+   matrixes_dir,
+   "tdm_bin_1_20.csv"
+ )
+ write.table(
+   tdm_bin_1_20_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ matrix_file <- create_path(
+   matrixes_dir,
+   "dtm_bin_1_20_m.csv"
+ )
+ write.table(
+   dtm_bin_1_20_m,
+   matrix_file,
+   sep = ";",
+   dec = ",",
+   col.names = NA
+ )
+ 
+ 
+
+ 

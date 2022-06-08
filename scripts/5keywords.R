@@ -40,6 +40,12 @@ for (d in 1:length(corpus)) {
   print(head(sort(dtm_tfidf_2_16_m[d,], decreasing = T)))
 }
 
+# waga tfidf jako miara istotności słów
+for (d in 1:length(corpus)) {
+  print(rownames(dtm_tfidf_4_18_m)[d])
+  print(head(sort(dtm_tfidf_4_18_m[d,], decreasing = T)))
+}
+
 # prawdopodobieństwo w LDA jako miara istotności słów
 for (d in 1:length(corpus)) {
   terms_importance <- c(results$topics[d,]%*%results$terms)
@@ -59,7 +65,7 @@ for (d in 1:length(corpus)) {
   wordcloud(
     corpus[d],
     max.words = 200,
-    colors = brewer.pal(8,"Spectral")
+    colors = brewer.pal(8,"Spectral"),
   )
   dev.off()
 }
