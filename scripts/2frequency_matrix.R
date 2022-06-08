@@ -2,7 +2,7 @@
 library(tm)
 
 # zmiana katalogu roboczego
-work_dir <- "C:/Users/qjsjnz/Desktop/PJNN11"
+work_dir <- "C:/Users/vpnt64/Desktop/PlantVillage/PJNN11"
 setwd(work_dir)
 
 # zdefiniowanie katalogów funkcjonalnych
