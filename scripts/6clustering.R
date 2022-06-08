@@ -52,17 +52,17 @@ legend <- paste(
   doc_names,
   sep = " - "
 )
-rownames(dtm_tf_all_m) <-  paste(
+rownames(dtm_tfidf_1_20_m) <-  paste(
   "d",
   1:doc_count,
   sep = ""
 )
-rownames(dtm_bin_all_m) <-  paste(
+rownames(dtm_tfidf_1_14_m) <-  paste(
   "d",
   1:doc_count,
   sep = ""
 )
-rownames(dtm_tfidf_2_16_m) <-  paste(
+rownames(dtm_tfidf_1_20_m) <-  paste(
   "d",
   1:doc_count,
   sep = ""
@@ -179,8 +179,8 @@ corrplot(clusters_matrix_3)
 # 2. liczba skupień
 
 # eksperyment 4
-clust_count_4 <- 3
-k_means_4 <- kmeans(dtm_tfidf_2_16, centers = clust_count_4)
+clust_count_4 <- 5
+k_means_4 <- kmeans(dtm_tfidf_1_20, centers = clust_count_4)
 clusters_4 <- k_means_4$cluster
 clusters_matrix_4 <- matrix(
   0,

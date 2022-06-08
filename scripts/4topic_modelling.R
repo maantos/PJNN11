@@ -24,12 +24,12 @@ eval(
 # utworzenie katalogu na wykresy
 topics_dir <- create_path(
   output_dir,
-  "topics"
+  "topics/count3"
 )
 dir.create(topics_dir, showWarnings = F)
 
 # analiza ukrytej alokacji Dirichlet'a
-topics_count <- 4
+topics_count <- 3
 lda <- LDA(
   dtm_tf_2_16,
   k = topics_count,

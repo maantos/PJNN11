@@ -24,23 +24,23 @@ eval(
 # utworzenie katalogu na wykresy
 clouds_dir <- create_path(
   output_dir,
-  "clouds"
+  "clouds/new"
 )
 dir.create(clouds_dir, showWarnings = F)
 
-# waga tf jako miara istotności słów
+# waga tfidf 1_14 jako miara istotności słów
 for (d in 1:length(corpus)) {
-  print(rownames(dtm_tf_2_16_m)[d])
-  print(head(sort(dtm_tf_2_16_m[d,], decreasing = T)))
+  print(rownames(dtm_tfidf_1_14_m)[d])
+  print(head(sort(dtm_tfidf_1_14_m[d,], decreasing = T)))
 }
 
-# waga tfidf jako miara istotności słów
+# waga tfidf 1_20 jako miara istotności słów
 for (d in 1:length(corpus)) {
-  print(rownames(dtm_tfidf_2_16_m)[d])
-  print(head(sort(dtm_tfidf_2_16_m[d,], decreasing = T)))
+  print(rownames(dtm_tfidf_1_20_m)[d])
+  print(head(sort(dtm_tfidf_1_20_m[d,], decreasing = T)))
 }
 
-# waga tfidf jako miara istotności słów
+# waga tfidf 4_18 jako miara istotności słów
 for (d in 1:length(corpus)) {
   print(rownames(dtm_tfidf_4_18_m)[d])
   print(head(sort(dtm_tfidf_4_18_m[d,], decreasing = T)))

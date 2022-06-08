@@ -24,12 +24,12 @@ eval(
 # utworzenie katalogu na wykresy
 plots_dir <- create_path(
   output_dir,
-  "plots"
+  "plots/1_14"
 )
 dir.create(plots_dir, showWarnings = F)
 
 # analiza głównych składowych
-pca <- prcomp(dtm_tfidf_4_18)
+pca <- prcomp(dtm_tfidf_1_14)
 
 # wykres dokumentów w przestrzeni dwuwymiarowej
 x <- pca$x[,1]
@@ -37,10 +37,10 @@ y <- pca$x[,2]
 legend <- paste(
   paste(
     "d",
-    1:length(rownames(dtm_tfidf_4_18)),
+    1:length(rownames(dtm_tfidf_1_14)),
     sep = ""
   ),
-  rownames(dtm_tfidf_4_18),
+  rownames(dtm_tfidf_1_14),
   sep = " - "
 )
 
@@ -58,7 +58,7 @@ text(
   y, 
   paste(
     "d",
-    1:length(rownames(dtm_tfidf_4_18)),
+    1:length(rownames(dtm_tfidf_1_14)),
     sep = ""
   ),
   pos = 4
@@ -73,7 +73,7 @@ dev.off()
 
 # analiza ukrytych wymiarów semantycznych
 # dekompozycja wg wartości osobliwych
-lsa <- lsa(tdm_tfidf_4_18)
+lsa <- lsa(tdm_tfidf_1_14)
 
 # wykres dokumentów w przestrzeni dwuwymiarowej
 coord_docs <- lsa$dk%*%diag(lsa$sk)
@@ -81,7 +81,7 @@ coord_terms <- lsa$tk%*%diag(lsa$sk)
 terms_importance <- diag(lsa$tk%*%diag(lsa$sk)%*%t(diag(lsa$sk))%*%t(lsa$tk))
 important_terms <- names(tail(sort(terms_importance),30))
 coord_important_terms <- coord_terms[important_terms,]
-own_terms <- c("chałupa", "ser", "mistrz", "studia", "jeno", "kiej", "lord", "polski")
+own_terms <- c("chałupa", "ser", "mistrz", "studia", "jeno", "kiej", "lord", "polski", "sie")
 coord_own_terms <- coord_terms[own_terms,]
 coord_plot_terms <- coord_own_terms
 
@@ -94,10 +94,10 @@ y2 <- coord_plot_terms[,2]
 legend <- paste(
   paste(
     "d",
-    1:length(colnames(tdm_tfidf_4_18)),
+    1:length(colnames(tdm_tfidf_1_14)),
     sep = ""
   ),
-  colnames(tdm_tfidf_4_18),
+  colnames(tdm_tfidf_1_14),
   sep = " - "
 )
 
@@ -116,7 +116,7 @@ text(
   y1, 
   paste(
     "d",
-    1:length(rownames(dtm_tfidf_4_18)),
+    1:length(rownames(dtm_tfidf_1_14)),
     sep = ""
   ),
   pos = 4
