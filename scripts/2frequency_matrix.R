@@ -87,19 +87,19 @@ tdm_tfidf_4_18 <- TermDocumentMatrix(
 tdm_tfidf_1_20 <- TermDocumentMatrix(
   corpus,
   control = list(
-    weighting = weightBin,
+    weighting = weightTfIdf,
     bounds = list(
       global = c(1,20)
     )
   )
 )
 
-tdm_tfidf_1_14 <- TermDocumentMatrix(
+tdm_tf_6_14 <- TermDocumentMatrix(
   corpus,
   control = list(
-    weighting = weightBin,
+    weighting = weightTf,
     bounds = list(
-      global = c(1,14)
+      global = c(6,14)
     )
   )
 )
@@ -156,12 +156,12 @@ dtm_tfidf_1_20 <- DocumentTermMatrix(
   )
 )
 
-dtm_tfidf_1_14 <- DocumentTermMatrix(
+dtm_tf_6_14 <- DocumentTermMatrix(
   corpus,
   control = list(
-    weighting = weightTfIdf,
+    weighting = weightTf,
     bounds = list(
-      global = c(1,14)
+      global = c(6,14)
     )
   )
 )
@@ -175,7 +175,7 @@ tdm_tfidf_2_16_m <- as.matrix(tdm_tfidf_2_16)
 #our
 tdm_tfidf_4_18_m <- as.matrix(tdm_tfidf_4_18)
 tdm_tfidf_1_20_m <- as.matrix(tdm_tfidf_1_20)
-tdm_tfidf_1_14_m <- as.matrix(tdm_tfidf_1_14)
+tdm_tf_6_14_m <- as.matrix(tdm_tf_6_14)
 
 dtm_tf_all_m <- as.matrix(dtm_tf_all)
 dtm_tfidf_all_m <- as.matrix(dtm_tfidf_all)
@@ -185,7 +185,7 @@ dtm_tfidf_2_16_m <- as.matrix(dtm_tfidf_2_16)
 #our
 dtm_tfidf_4_18_m <- as.matrix(dtm_tfidf_4_18)
 dtm_tfidf_1_20_m <- as.matrix(dtm_tfidf_1_20)
-dtm_tfidf_1_14_m <- as.matrix(dtm_tfidf_1_14)
+dtm_tf_6_14_m <- as.matrix(dtm_tf_6_14)
 
 # utworzenie katalogu na macierze
 matrixes_dir <- create_path(
@@ -337,10 +337,10 @@ matrixes_dir,
  ####
  matrix_file <- create_path(
    matrixes_dir,
-   "tdm_tfidf_1_14.csv"
+   "tdm_tf_6_14_m.csv"
  )
  write.table(
-   tdm_tfidf_1_14_m,
+   tdm_tf_6_14_m,
    matrix_file,
    sep = ";",
    dec = ",",
@@ -348,10 +348,10 @@ matrixes_dir,
  )
  matrix_file <- create_path(
    matrixes_dir,
-   "dtm_tfidf_1_14.csv"
+   "dtm_tf_6_14_m.csv"
  )
  write.table(
-   dtm_tfidf_1_14_m,
+   dtm_tf_6_14_m,
    matrix_file,
    sep = ";",
    dec = ",",
