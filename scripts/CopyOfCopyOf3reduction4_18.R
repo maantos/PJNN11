@@ -24,12 +24,12 @@ eval(
 # utworzenie katalogu na wykresy
 plots_dir <- create_path(
   output_dir,
-  "plots/tf_6_14"
+  "plots/tfidf_4_18"
 )
 dir.create(plots_dir, showWarnings = F)
 
 # analiza głównych składowych
-pca <- prcomp(dtm_tf_6_14)
+pca <- prcomp(dtm_tfidf_4_18)
 
 # wykres dokumentów w przestrzeni dwuwymiarowej
 x <- pca$x[,1]
@@ -37,10 +37,10 @@ y <- pca$x[,2]
 legend <- paste(
   paste(
     "d",
-    1:length(rownames(dtm_tf_6_14)),
+    1:length(rownames(dtm_tfidf_4_18)),
     sep = ""
   ),
-  rownames(dtm_tf_6_14),
+  rownames(dtm_tfidf_4_18),
   sep = " - "
 )
 
@@ -59,7 +59,7 @@ text(
   y, 
   paste(
     "d",
-    1:length(rownames(dtm_tf_6_14)),
+    1:length(rownames(dtm_tfidf_4_18)),
     sep = ""
   ),
   pos = 4
@@ -69,7 +69,7 @@ dev.off()
 
 # analiza ukrytych wymiarów semantycznych
 # dekompozycja wg wartości osobliwych
-lsa <- lsa(tdm_tf_6_14)
+lsa <- lsa(tdm_tfidf_4_18)
 
 # wykres dokumentów w przestrzeni dwuwymiarowej
 coord_docs <- lsa$dk%*%diag(lsa$sk)
@@ -77,7 +77,7 @@ coord_terms <- lsa$tk%*%diag(lsa$sk)
 terms_importance <- diag(lsa$tk%*%diag(lsa$sk)%*%t(diag(lsa$sk))%*%t(lsa$tk))
 important_terms <- names(tail(sort(terms_importance),30))
 coord_important_terms <- coord_terms[important_terms,]
-own_terms <- c("oczy","noc","ludzi","czarny","śnieg","pole","głos","słońce","ojciec","drzewo","głowa","rycerz","historia","ziemia","góra","wieś","miecz","mur","król")
+own_terms <- c("sapkowski","piwo","juści","wiedźmin","ino","królowa","chałupa","ser","mistrz","jeno","kiej","lord","polski")
 coord_own_terms <- coord_terms[own_terms,]
 coord_plot_terms <- coord_own_terms
 
@@ -90,10 +90,10 @@ y2 <- coord_plot_terms[,2]
 legend <- paste(
   paste(
     "d",
-    1:length(colnames(tdm_tf_6_14)),
+    1:length(colnames(tdm_tfidf_4_18)),
     sep = ""
   ),
-  colnames(tdm_tf_6_14),
+  colnames(tdm_tfidf_4_18),
   sep = " - "
 )
 
@@ -105,14 +105,15 @@ png(plot_file)
 plot(
   x1, 
   y1,
-  xlim = c(-30, 5)
+  xlim = c(-0.2, 0.2),
+  ylim = c(-0.06,0.1)
 )
 text(
   x1, 
   y1, 
   paste(
     "d",
-    1:length(rownames(dtm_tf_6_14)),
+    1:length(rownames(dtm_tfidf_4_18)),
     sep = ""
   ),
   pos = 4
